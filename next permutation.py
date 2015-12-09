@@ -30,7 +30,7 @@ class Solution(object):
             self.reverse(nums, 0, len(nums) - 1)
         else:
             exc = len(nums) - 1
-            while nums[exc] <= nums[rev]: # need to find a digit just bigger than nums[rev]
+            while nums[exc] <= nums[rev]: # need to find a digit just bigger than nums[rev], can use binary search to reduce running time
                 exc -= 1
             key = nums[rev]
             nums[rev] = nums[exc]
