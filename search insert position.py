@@ -36,31 +36,11 @@ class Solution(object):
         start = 0
         end = len(nums) - 1
         while start <= end: # find the 1st element >= target, if not, insert at len(nums)
-            mid = (start + end) / 2
+            mid = (end - start) / 2 + start # using this will prevent overflow, suppose start and end will be really large
             if nums[mid] < target:
                 start = mid + 1
             else:
-                if end == 0 or nums[end - 1] < target: # check whether it is the 1st element >= target
-                    return end
-                end = mid - 1
-        return start
-
-class Solution(object):
-    def searchInsert(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: int
-        """
-        start = 0
-        end = len(nums) - 1
-        while start <= end:
-            mid = (start + end) / 2
-            if nums[mid] < target:
-                start = mid + 1
-            elif nums[mid] == target:
-                start = mid
-                break
-            else: # if nums[end] < target, end + 1 will be returned
+                #if end == 0 or nums[end - 1] < target: # check whether it is the 1st element >= target, no need, we just need to find last element < target
+                    #return end
                 end = mid - 1
         return start
