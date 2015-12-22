@@ -29,4 +29,20 @@ class Solution(object):
             if nums[i] != i:
                 return i
         return len(nums)
-        return len(nums)
+        
+'''
+bit manipulation: O(n) time O(1) space
+1) ^ all numbers from 0 to n
+2) if k is missing, res is k
+'''
+class Solution(object):
+    def missingNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        res = len(nums) # if 0 to n - 1 is included or nums is None, ans is n
+        for i in xrange(len(nums)): 
+            res ^= i
+            res ^= nums[i]
+        return res
