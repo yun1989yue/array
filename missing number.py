@@ -33,7 +33,8 @@ class Solution(object):
 '''
 bit manipulation: O(n) time O(1) space
 1) ^ all numbers from 0 to n
-2) if k is missing, res is k
+2) ^ all numbers in nums
+3) if k is missing, res is k
 '''
 class Solution(object):
     def missingNumber(self, nums):
@@ -46,3 +47,25 @@ class Solution(object):
             res ^= i
             res ^= nums[i]
         return res
+
+'''
+bit manipulation: O(n) time O(1) space
+1) sum all numbers from 0 to n
+2) minus all numbers in nums
+3) if k is missing, res is k
+'''
+class Solution(object):
+    def missingNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        res = len(nums)
+        for i in xrange(len(nums)):
+            res += i
+            res -= nums[i]
+        return res
+        
+'''
+sort and binary search
+'''
