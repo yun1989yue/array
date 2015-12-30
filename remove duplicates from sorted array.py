@@ -14,11 +14,9 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if len(nums) < 2:
-            return len(nums)
-        start = 0
-        for i in xrange(1,len(nums)):
-            if nums[i] != nums[i-1]:
+        start = -1
+        for i in xrange(len(nums)):
+            if i == 0 or nums[i] != nums[i-1]:
                 start += 1
                 if start != i:
                     nums[start] = nums[i]
