@@ -17,7 +17,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        for i in xrange(len(nums)): # move i to nums[i]
+        for i in xrange(len(nums)): # move i to nums[i], every updation means a number is filled to its position, hence O(n) times updation
             while nums[i] != len(nums) and nums[i] != i and nums[nums[i]] != nums[i]: # must make sure nums[i] != len(nums) for every 
             #exchange
                 key = nums[i]
