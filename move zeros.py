@@ -16,12 +16,10 @@ class Solution(object):
         :type nums: List[int]
         :rtype: void Do not return anything, modify nums in-place instead.
         """
-        nonzero = -1 # how many nonzero numbers before pointer cur
-        cur = 0 # current pointer to be explored
-        while cur < len(nums):
-            if nums[cur] != 0:
+        nonzero = -1 # how many nonzero numbers found
+        for i in xrange(len(nums)): # move nonzero to its position
+            if nums[i] != 0:
                 nonzero += 1
-                if cur != nonzero:
-                    nums[nonzero] = nums[cur]
-                    nums[cur] = 0
-            cur += 1
+                if i != nonzero:
+                    nums[nonzero] = nums[i]
+                    nums[i] = 0
