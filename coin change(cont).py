@@ -60,13 +60,52 @@ class Solution(object):
         nums = {}
         for c in coins:
             nums[c] = 1
-        while min(nums) < amount:
+        while min(nums) < amount: # it is correct, because if amount is 1st reached, it will be returned as smallest comb, but same value smaller than amount may appear more than once with different numbers comb, e.g. [1,2,5] 5 will appeared twice with comb 1 and 3
             temp = {}
             for n in nums:
                 for c in coins:
                     if n + c not in nums:
                         if n + c == amount:
                             return nums[n] + 1
-                        temp[n + c] = nums[n] + 1
+                        elif n + c < amount:
+                            temp[n + c] = nums[n] + 1
             nums = temp
+        return -1
+'''
+Improved, BFS O(max(mn, nlogn) time O(m) space)
+'''
+class Solution(object):
+    def coinChange(self, coins, amount):
+        """
+        :type coins: List[int]
+        :type amount: int
+        :rtype: int
+        """
+        if not coins or amount < 0: # boundart cases, 1) coins = [] 2) amount < 0 3) amount = 0
+            return -1
+        if amount == 0:
+            return 0
+        coins.sort() 
+        used = {} # explored numbers comb with least coins
+        level = {} # numbers can be reached by current number of coins
+        for c in coins: # base cases
+            if c == amount:
+                return 1
+            elif c < amount:
+                used[c] = 1
+                level[c] = 1
+        times = 1
+        while times <= amount/coins[0]: # at most amount/coins[0] can be used to combine amount
+            times += 1
+            temp = {}
+            for l in level:
+                for c in coins:
+                    if l + c < amount and l+c not in used and l+c not in temp: # find smallest number of coins
+                        temp[l+c] = times
+                        used[l+c] = times
+                    elif l + c == amount:
+                        return times
+                    elif l + c > amount:
+                        break
+            level = temp
         return -1
