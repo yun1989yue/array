@@ -27,3 +27,21 @@ class Solution(object):
             return start
         else:
             return start + 1
+
+
+class Solution(object):
+    def removeElement(self, nums, val):
+        """
+        :type nums: List[int]
+        :type val: int
+        :rtype: int
+        """
+        # if val is rare, we need to move val to the end, otherwise we need too many swap operations
+        dif = -1
+        for i in xrange(len(nums)):
+            if nums[i] != val:
+                dif += 1
+                if dif != i:
+                    nums[dif] = nums[i]
+                    nums[i] = val
+        return dif + 1
